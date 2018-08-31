@@ -23,6 +23,7 @@ Auth::routes();
  */
 Route::get('/admin', 'AdminController@index')->name('admin');
 Route::get('/admin/users', 'UsermanagerController@index')->name('usermanager');
+Route::get('/admin/data/users', 'DataController@userdata');
 
 
 /*
