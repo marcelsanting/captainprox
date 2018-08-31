@@ -1,15 +1,22 @@
 <?php
 /**
- * AdminController
+ * This is the summary for a DocBlock.
  *
- * Main Controller for Admin UI
+ * This is the description for a DocBlock. This text may contain
+ * multiple lines and even some _markdown_.
  *
- * @package Laravel
- * @version 1.0.0
- * @author  ****
- * @license https://www.gnu.org/licenses/gpl-3.0.txt GNU/GPLv3
- * @link ****
- * @since  1.0.0
+ * * Markdown style lists function too
+ * * Just try this out once
+ *
+ * The section after the description contains the tags; which provide
+ * structured meta-data concerning the given element.
+ *
+ * @author  Mike van Riel <me@mikevanriel.com>
+ *
+ * @since 1.0
+ *
+ * @param int    $example  This is an example function/method parameter description.
+ * @param string $example2 This is a second example.
  */
 namespace App\Http\Controllers;
 
