@@ -18,7 +18,6 @@ before_script:
 - npm install -g jshint
 - npm install
 - phpcs -w --config-set severity 3
-- phpcs --standard=PSR2
 - php artisan key:generate
 - php artisan migrate --seed
 

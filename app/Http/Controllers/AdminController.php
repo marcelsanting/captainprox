@@ -28,11 +28,12 @@ use Illuminate\Support\Facades\Auth;
 
 /**
  * Class AdminController
- * @category  Controller
- * @package   App\Http\Controllers
- * @author    Marcel Santing <marcel@prox-web.nl>
- * @license   https://opensource.org/licenses/MIT  MIT License
- * @link      https://github.com/marcelsanting/captainprox
+ *
+ * @category Controller
+ * @package  App\Http\Controllers
+ * @author   Marcel Santing <marcel@prox-web.nl>
+ * @license  https://opensource.org/licenses/MIT  MIT License
+ * @link     https://github.com/marcelsanting/captainprox
  */
 class AdminController extends Controller
 {
@@ -45,11 +46,12 @@ class AdminController extends Controller
     }
 
     /**
+     * Loads the first page after login
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        return view('admin.home',
-            ["currrentuser" => User::find(Auth::id())]);
+        return view('admin.home', ["currrentuser" => User::find(Auth::id())]);
     }
 }

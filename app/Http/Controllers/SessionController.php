@@ -28,11 +28,20 @@ use Illuminate\Support\Facades\Session;
 
 /**
  * Class SessionController
- * @package App\Http\Controllers
+ *
+ * @category  Controller
+ * @package   App\Http\Controllers
+ * @author    Original Author <author@example.com>
+ * @author    Marcel Santing <marcel@prox-web.nl>
+ * @copyright 2018 Prox-Web
+ * @license   https://opensource.org/licenses/MIT  MIT License
+ * @link      https://github.com/marcelsanting/captainproxessionController
  */
-class SessionController extends Controller
+Class SessionController extends Controller
 {
     /**
+     * Returns the login view
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
@@ -41,20 +50,28 @@ class SessionController extends Controller
     }
 
     /**
+     * Validating the User
+     *
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $this->validate(
+            $request, [
             "name" => "required",
             "password" => "required"
-        ]);
+            ]
+        );
 
-        if (Auth::attempt([
+        if (Auth::attempt(
+            [
             'name' => $request->name,
             'password' => $request->password
-        ])) {
+            ]
+        )
+        ) {
             return redirect('admin');
         }
 
@@ -62,6 +79,8 @@ class SessionController extends Controller
     }
 
     /**
+     * Logs out the user and kill all sessions
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy()
