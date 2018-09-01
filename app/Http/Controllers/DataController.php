@@ -15,12 +15,12 @@
  *
  * @since 1.0
  *
- * @param int    $example  This is an example function/method parameter description.
+ * @param int $example This is an example function/method parameter description.
  * @param string $example2 This is a second example.
  */
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\User;
 
 class DataController extends Controller

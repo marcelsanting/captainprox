@@ -15,15 +15,16 @@
  *
  * @since 1.0
  *
- * @param int    $example  This is an example function/method parameter description.
+ * @param int $example This is an example function/method parameter description.
  * @param string $example2 This is a second example.
  */
+
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use Illuminate\Support\Facades\Auth;
-Use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Class SessionController
@@ -45,16 +46,15 @@ class SessionController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             "name" => "required",
             "password" => "required"
         ]);
 
-        if(Auth::attempt([
+        if (Auth::attempt([
             'name' => $request->name,
             'password' => $request->password
-        ]))
-        {
+        ])) {
             return redirect('admin');
         }
 

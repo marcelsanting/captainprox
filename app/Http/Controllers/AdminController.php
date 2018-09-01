@@ -20,6 +20,7 @@
  * @link      https://github.com/marcelsanting/captainprox
  * @since     File available since Release 1.0.0
  */
+
 namespace App\Http\Controllers;
 
 use App\User;
@@ -46,7 +47,8 @@ class AdminController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(){
+    public function index()
+    {
         return view('admin.home',
             ["currrentuser" => User::find(Auth::id())]);
     }
