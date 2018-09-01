@@ -1,22 +1,24 @@
 <?php
 /**
- * This is the summary for a DocBlock.
+ * AdminController
  *
- * This is the description for a DocBlock. This text may contain
- * multiple lines and even some _markdown_.
+ * AdminController sets the basis after the user has logged on to the website
  *
- * * Markdown style lists function too
- * * Just try this out once
+ * PHP version 7
  *
- * The section after the description contains the tags; which provide
- * structured meta-data concerning the given element.
+ * LICENSE: This source file is subject to the MIT license
+ * that is available through the world-wide-web at the following URI:
+ * https://opensource.org/licenses/MIT
  *
- * @author  Mike van Riel <me@mikevanriel.com>
- *
- * @since 1.0
- *
- * @param int $example This is an example function/method parameter description.
- * @param string $example2 This is a second example.
+ * @category  LaravelProject
+ * @package   ProxCMS
+ * @author    Original Author <author@example.com>
+ * @author    Marcel Santing <marcel@prox-web.nl>
+ * @copyright 2018 Prox-Web
+ * @license   https://opensource.org/licenses/MIT  MIT License
+ * @version   SVN: $Id$
+ * @link      https://github.com/marcelsanting/captainprox
+ * @since     File available since Release 1.0.0
  */
 
 namespace App\Http\Controllers;
