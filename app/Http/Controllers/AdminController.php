@@ -11,11 +11,10 @@
  * PHP Version 7
  *
  * @category PHP
- * @Package Laravel
+ * @Package  Laravel
+ * @license https://opensource.org/licenses/MIT MIT Public License
  * @author  Marcel Santing <marcel@prox-web.nl>
  * @link https://github.com/marcelsanting/captainprox Wiki of the project
- * @license MIT
- * @license https://opensource.org/licenses/MIT MIT Public License
  *
  */
 namespace App\Http\Controllers;
