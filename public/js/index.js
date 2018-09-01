@@ -89164,7 +89164,14 @@ jQuery.fn.vectorMap('addMap', 'world_mill', { "insets": [{ "width": 900, "top": 
 
 
 /* unused harmony default export */ var _unused_webpack_default_export = ((function () {
-  __WEBPACK_IMPORTED_MODULE_0_jquery__('#dataTable').DataTable();
+
+    __WEBPACK_IMPORTED_MODULE_0_jquery__(document).ready(function () {
+        __WEBPACK_IMPORTED_MODULE_0_jquery__('#UserTable').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": "/admin/data/users"
+        });
+    });
 })());
 
 /***/ }),

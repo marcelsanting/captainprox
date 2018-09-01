@@ -11,38 +11,23 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="bgc-white bd bdrs-3 p-20 mB-20">
-                    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <table id="UserTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
                             <th>Username</th>
                             <th>Email</th>
-                            <th>Real name</th>
-                            <th>Status</th>
-                            <th colspan="3">Action</th>
+                            <th>created</th>
+                            <th >last update</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
                             <th>Username</th>
                             <th>Email</th>
-                            <th>Real name</th>
-                            <th>Status</th>
-                            <th colspan="3">Action</th>
+                            <th>created</th>
+                            <th >last update</th>
                         </tr>
                         </tfoot>
-                        <tbody>
-                            @foreach($users as $user)
-                                <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>
-                                        {{ $user->profile->name_first }} {{ $user->profile->name_last }}
-                                    </td>
-                                    <td>unknown</td>
-                                    <td><button class="btn-primary">Edit</button></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
                     </table>
                 </div>
             </div>

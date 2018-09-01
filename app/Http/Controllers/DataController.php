@@ -1,8 +1,8 @@
 <?php
 /**
- * AdminController
+ * Data Controller
  *
- * AdminController sets the basis after the user has logged on to the website
+ * Data Controleer spits out the data needed for multiple lists
  *
  * PHP version 7
  *
@@ -26,7 +26,7 @@ namespace App\Http\Controllers;
 use App\User;
 
 /**
- * Class UsermanagerController
+ * Class DataController
  *
  * @category  Controller
  * @package   App\Http\Controllers
@@ -34,23 +34,19 @@ use App\User;
  * @author    Marcel Santing <marcel@prox-web.nl>
  * @copyright 2018 Prox-Web
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @link      https://github.com/marcelsanting/captainproxessionController
+ * @link      https://github.com/marcelsanting/captainprox
  */
-class UsermanagerController extends Controller
+class DataController extends Controller
 {
     /**
-     * Opens the UserAdministration View
+     * Fetches all userdata
      *
-     * @param User $user The User model object
+     * @return mixed
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Exception
      */
-    public function index(User $user)
+    public function userdata()
     {
-        return view(
-            'admin.usermanager', [
-            "users" => $user->all()
-             ]
-        );
+        return datatables()->of(User::all())->toJson();
     }
 }

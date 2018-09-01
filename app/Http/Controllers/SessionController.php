@@ -1,19 +1,49 @@
 <?php
+/**
+ * AdminController
+ *
+ * AdminController sets the basis after the user has logged on to the website
+ *
+ * PHP version 7
+ *
+ * LICENSE: This source file is subject to the MIT license
+ * that is available through the world-wide-web at the following URI:
+ * https://opensource.org/licenses/MIT
+ *
+ * @category  LaravelProject
+ * @package   ProxCMS
+ * @author    Original Author <author@example.com>
+ * @author    Marcel Santing <marcel@prox-web.nl>
+ * @copyright 2018 Prox-Web
+ * @license   https://opensource.org/licenses/MIT  MIT License
+ * @version   SVN: $Id$
+ * @link      https://github.com/marcelsanting/captainprox
+ * @since     File available since Release 1.0.0
+ */
+
 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use Illuminate\Support\Facades\Auth;
-Use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Class SessionController
- * @package App\Http\Controllers
+ *
+ * @category  Controller
+ * @package   App\Http\Controllers
+ * @author    Original Author <author@example.com>
+ * @author    Marcel Santing <marcel@prox-web.nl>
+ * @copyright 2018 Prox-Web
+ * @license   https://opensource.org/licenses/MIT  MIT License
+ * @link      https://github.com/marcelsanting/captainproxessionController
  */
-class SessionController extends Controller
+Class SessionController extends Controller
 {
     /**
+     * Returns the login view
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
@@ -21,22 +51,30 @@ class SessionController extends Controller
         return view('session.login');
     }
 
+
     /**
-     * @param Request $request
+     * Validates the user and login
+     *
+     * @param Request $request Some comment
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $this->validate(
+            $request, [
             "name" => "required",
             "password" => "required"
-        ]);
+            ]
+        );
 
-        if(Auth::attempt([
+        if (Auth::attempt(
+            [
             'name' => $request->name,
             'password' => $request->password
-        ]))
-        {
+            ]
+        )
+        ) {
             return redirect('admin');
         }
 
@@ -44,6 +82,8 @@ class SessionController extends Controller
     }
 
     /**
+     * Logs out the user and kill all sessions
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy()
