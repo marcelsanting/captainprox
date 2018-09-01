@@ -12,6 +12,8 @@ before_script:
 - composer self-update
 - composer install --no-interaction
 - pear install pear/PHP_CodeSniffer
+- git clone https://github.com/klaussilveira/phpcs-psr /usr/share/php/PHP/CodeSniffer/Standards/PSR
+- phpcs --config-set default_standard PSR
 - phpenv rehash
 - nvm install 7.7.1
 - npm install npm@latest -g
