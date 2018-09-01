@@ -51,10 +51,11 @@ Class SessionController extends Controller
         return view('session.login');
     }
 
+
     /**
-     * Validating the User
+     * Validates the user and login
      *
-     * @param Request $request
+     * @param Request $request Some comment
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
