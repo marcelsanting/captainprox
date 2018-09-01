@@ -1,22 +1,22 @@
 <?php
 /**
- * This is the summary for a DocBlock.
+ * This is the summary for the AdminConreoller.
  *
- * This is the description for a DocBlock. This text may contain
- * multiple lines and even some _markdown_.
- *
- * * Markdown style lists function too
- * * Just try this out once
+ * This controlles the functions for the basic view
+ * after the user has logged on
  *
  * The section after the description contains the tags; which provide
  * structured meta-data concerning the given element.
  *
- * @author  Mike van Riel <me@mikevanriel.com>
+ * PHP Version 7
  *
- * @since 1.0
+ * @category PHP
+ * @Package Laravel
+ * @author  Marcel Santing <marcel@prox-web.nl>
+ * @link https://github.com/marcelsanting/captainprox Wiki of the project
+ * @license MIT
+ * @license https://opensource.org/licenses/MIT MIT Public License
  *
- * @param int    $example  This is an example function/method parameter description.
- * @param string $example2 This is a second example.
  */
 namespace App\Http\Controllers;
 

@@ -17,7 +17,7 @@ before_script:
 - npm install npm@latest -g
 - npm install -g jshint
 - npm install
-- phpcs --config-set severity 3
+- phpcs -w --config-set severity 3
 - php artisan key:generate
 - php artisan migrate --seed
 
