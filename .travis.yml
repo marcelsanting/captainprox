@@ -14,22 +14,18 @@ before_script:
 - pear install pear/PHP_CodeSniffer
 - phpenv rehash
 - nvm install 7.7.1
-- npm install npm@latest -g
-- npm install -g jshint
-- npm install
 - phpcs -w --config-set severity 3
 - php artisan key:generate
 - php artisan migrate --seed
 
 script:
-  - vendor/bin/phpunit --coverage-text
-  - phpcs --ignore=app/Http/Controllers/Auth,app/Http/Controllers/Controller.php app/Http/Controllers
-  - npm run production
-  - jshint resources/assets/js/modules/*
+- vendor/bin/phpunit --coverage-text
+- phpcs --ignore=app/Http/Controllers/Auth,app/Http/Controllers/Controller.php app/Http/Controllers
+- jshint resources/assets/js/modules/*
 
 notifications:
 email:
-    recipients:
-        - marcel@prox-web.nl
-    on_success: always
-    on_failure: always
+  recipients:
+  - marcel@prox-web.nl
+  on_success: always
+  on_failure: always
