@@ -1,21 +1,24 @@
 <?php
 /**
- * This is the summary for the AdminConreoller.
+ * Short description for file
  *
- * This controlles the functions for the basic view
- * after the user has logged on
+ * Long description for file (if any)...
  *
- * The section after the description contains the tags; which provide
- * structured meta-data concerning the given element.
+ * PHP version 5
  *
- * PHP Version 7
+ * LICENSE: This source file is subject to the MIT license
+ * that is available through the world-wide-web at the following URI:
+ * https://opensource.org/licenses/MIT
  *
- * @category PHP
- * @Package  Laravel
- * @license https://opensource.org/licenses/MIT MIT Public License
- * @author  Marcel Santing <marcel@prox-web.nl>
- * @link https://github.com/marcelsanting/captainprox Wiki of the project
- *
+ * @category   LaravelProject
+ * @package    ProxCMS
+ * @author     Original Author <author@example.com>
+ * @author     Marcel Santing <marcel@prox-web.nl>
+ * @copyright  2018 Prox-Web
+ * @license    https://opensource.org/licenses/MIT  MIT License
+ * @version    SVN: $Id$
+ * @link       https://github.com/marcelsanting/captainprox
+ * @since      File available since Release 1.0.0
  */
 namespace App\Http\Controllers;
 
