@@ -22,6 +22,7 @@
  */
 namespace App\Http\Controllers;
 
+use App\models\Status;
 use Illuminate\Http\Request;
 
 /**
@@ -39,5 +40,42 @@ use Illuminate\Http\Request;
  */
 class ProjectController extends Controller
 {
-    //
+    /**
+     * Returns the overview of the projects
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    Public function index()
+    {
+        return view('projects.index');
+    }
+
+    /**
+     * Returns the new Project form
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        $statuses = Status::all();
+
+        return view(
+            'projects.addproject',
+            [
+                "statuses" => $statuses
+            ]
+        );
+    }
+
+    /**
+     * Saves the new project created in the form
+     *
+     * @param Request $request data from form
+     *
+     * @return null
+     */
+    public function store(Request $request)
+    {
+        return null; //TODO make a proper function
+    }
 }

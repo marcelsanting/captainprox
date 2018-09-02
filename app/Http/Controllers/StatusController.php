@@ -43,6 +43,16 @@ class StatusController extends Controller
 
 
     /**
+     * Enabels Security in the controller
+     *
+     * StatusController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Returns the view of the list
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -59,7 +69,7 @@ class StatusController extends Controller
      *
      * @return mixed
      */
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $this->validate(
             request(), [
