@@ -28,6 +28,8 @@ use Illuminate\Http\Request;
 /**
  * Class StatusController
  *
+ * Handles view and models of the statuses
+ *
  * @category  Controller
  * @package   App\Http\Controllers
  * @author    Original Author <author@example.com>
