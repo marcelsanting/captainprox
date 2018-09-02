@@ -47,10 +47,6 @@ class UsermanagerController extends Controller
      */
     public function index(User $user)
     {
-        return view(
-            'admin.usermanager', [
-            "users" => $user->all()
-             ]
-        );
+        return view('admin.usermanager');
     }
 }

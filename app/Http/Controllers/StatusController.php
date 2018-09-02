@@ -1,8 +1,8 @@
 <?php
 /**
- * Data Controller
+ * StatusController
  *
- * Data Controleer spits out the data needed for multiple lists
+ * StatusController gives all projects, features and tasks their current status
  *
  * PHP version 7
  *
@@ -20,14 +20,13 @@
  * @link      https://github.com/marcelsanting/captainprox
  * @since     File available since Release 1.0.0
  */
-
 namespace App\Http\Controllers;
 
-use App\User;
 use App\models\Status;
+use Illuminate\Http\Request;
 
 /**
- * Class DataController
+ * Class StatusController
  *
  * @category  Controller
  * @package   App\Http\Controllers
@@ -35,31 +34,39 @@ use App\models\Status;
  * @author    Marcel Santing <marcel@prox-web.nl>
  * @copyright 2018 Prox-Web
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @link      https://github.com/marcelsanting/captainprox
+ * @link      https://github.com/marcelsanting/captainproxessionController
  */
-class DataController extends Controller
+class StatusController extends Controller
 {
+
+
     /**
-     * Fetches all userdata
+     * Returns the view of the list
      *
-     * @return mixed
-     *
-     * @throws \Exception
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function userdata()
+    public function index()
     {
-        return datatables()->of(User::all())->toJson();
+        return view('projects.status');
     }
 
     /**
-     * Returns al list of all status data needed
+     * Sets an creates a task
+     *
+     * @param Request $request for the form request
      *
      * @return mixed
-     *
-     * @throws \Exception
      */
-    public function statusesdata()
+    public function create(Request $request)
     {
-        return datatables()->of(Status::all())->toJson();
+        $this->validate(
+            request(), [
+                "title" => "required|unique:statuses"
+            ]
+        );
+
+        Status::create(request(["title"]));
+
+        redirect()->back();
     }
 }

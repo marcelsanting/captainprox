@@ -89169,7 +89169,15 @@ jQuery.fn.vectorMap('addMap', 'world_mill', { "insets": [{ "width": 900, "top": 
         __WEBPACK_IMPORTED_MODULE_0_jquery__('#UserTable').DataTable({
             "processing": true,
             "serverSide": true,
-            "ajax": "/admin/data/users"
+            "ajax": "/admin/data/users",
+            "columns": [{ "data": "name" }, { "data": "email" }, { "data": "created_at" }, { "data": "updated_at" }]
+        });
+
+        __WEBPACK_IMPORTED_MODULE_0_jquery__('#StatusTable').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": "/admin/data/statuses",
+            "columns": [{ "data": "id" }, { "data": "title" }, { "data": "belongs_to" }, { "data": "created_at" }, { "data": "updated_at" }]
         });
     });
 })());

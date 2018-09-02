@@ -35,3 +35,12 @@ Route::get('/register', 'RegistrationController@create')->name('register');
 Route::post('/register', 'RegistrationController@store');
 Route::get('/signoff', 'SessionController@destroy');
 
+/*
+ * Specific routes for the Project Manager
+ */
+
+Route::get('/admin/projects/list', 'ProjectController@index')->name('projects');
+Route::get('/admin/projects/status/list', 'StatusController@index')->name('status');
+Route::get('/admin/data/statuses', 'DataController@statusesdata');
+Route::post('/admin/data/statuses', 'StatusController@create');
+
