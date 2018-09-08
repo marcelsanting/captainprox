@@ -24,6 +24,7 @@ namespace App\Http\Controllers;
 
 use App\models\Status;
 use Illuminate\Http\Request;
+use App\Models\Project;
 
 /**
  * Class ProjectController
@@ -76,6 +77,15 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        return null; //TODO make a proper function
+        $this->validate(
+            request(), [
+                "title" => "required|unique:projects",
+                "body" => "required",
+                "user_id" => "required"
+            ]
+        );
+        Project::create(request(['title', 'body', 'user_id']));
+
+        return redirect()->back();
     }
 }

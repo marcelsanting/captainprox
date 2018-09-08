@@ -19,4 +19,3 @@ mix.styles([
 
 mix.js('resources/assets/scripts/index.js', 'public/js')
     .sass('resources/assets/styles/index.scss', 'public/css');
-

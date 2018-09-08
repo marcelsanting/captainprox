@@ -25,7 +25,8 @@
                             <th>Title</th>
                             <th>Project Owner</th>
                             <th>progress</th>
-                            <th>Due date</th>
+                            <th>Status</th>
+                            <th>actions</th>
                         </tr>
                         </thead>
                         <tfoot>
@@ -34,11 +35,13 @@
                             <th>Title</th>
                             <th>Project Owner</th>
                             <th>progress</th>
-                            <th>Due date</th>
+                            <th>Status</th>
+                            <th>actions</th>
                         </tr>
                         </tfoot>
                     </table>
                 </div>
             </div>
         </div>
+    </div>
 @endsection

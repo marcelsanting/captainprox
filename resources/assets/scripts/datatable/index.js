@@ -1,5 +1,9 @@
 import * as $ from 'jquery';
 import 'datatables';
+import 'datatables.net-dt'
+import 'datatables.net-dt/css/jquery.datatables.css';
+import 'datatables.net-plugins/dataRender/percentageBars.js';
+
 
 export default (function () {
 
@@ -27,6 +31,23 @@ $(document).ready(function () {
             { "data": "created_at" },
             { "data": "updated_at" },
         ]
+    });
+    $('#ProjectTable').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax":"/admin/data/projects",
+        "columns": [
+            { "data": "id" },
+            { "data": "title" },
+            { "data": "owner" },
+            { "data": "progress" },
+            { "data": "statusname" },
+            { "data": "updated_at" },
+        ],
+        columnDefs: [ {
+            targets: 3,
+            render: $.fn.dataTable.render.percentBar( 'round','#FFF', '#269ABC', '#31B0D5', '#286090', 1, 'groove' )
+        } ]
     });
 });
 

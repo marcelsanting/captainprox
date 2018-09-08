@@ -23,6 +23,7 @@
 namespace App\Models;
 
 use App\User;
+use App\models\Status;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -44,7 +45,7 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'body', "owner_id"
+        'title', 'body', "user_id"
     ];
 
     /**
@@ -54,7 +55,7 @@ class Project extends Model
      */
     public function owner()
     {
-        return $this->hasOne(User::id);
+        return $this->hasOne('App\User', "id", "user_id");
     }
 
     /**
@@ -76,4 +77,15 @@ class Project extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    /**
+     * Return Status name of status
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function currentstatus()
+    {
+        return $this->HasOne(Status::class, "id", 'status');
+    }
+
 }

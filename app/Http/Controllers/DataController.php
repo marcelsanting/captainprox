@@ -23,8 +23,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\User;
 use App\models\Status;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class DataController
@@ -61,5 +64,55 @@ class DataController extends Controller
     public function statusesdata()
     {
         return datatables()->of(Status::all())->toJson();
+    }
+
+    /**
+     * Returns al list of all projects data needed
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function projectsdata()
+    {
+        $model = Project::query();
+
+        return DataTables::eloquent($model)
+            ->addColumn(
+                'owner',
+                function (Project $project) {
+                    return $project->owner->name;
+                }
+            )
+            ->addColumn(
+                'statusname',
+
+                function (Project $project) {
+                    return $project->currentstatus->title;
+                }
+
+            )
+            ->addColumn(
+                'progress',
+                function (Project $project) {
+                    $total = $project->tasks()
+                        ->count("closed");
+                    $done = $project->tasks()
+                        ->where(
+                            "closed",
+                            "=",
+                            "1"
+                        )
+                        ->count("closed");
+                    $all = $total + $done;
+                    if (!$total) {
+                        return 0;
+                    }
+
+                    return $done/$all*100;
+                }
+            )
+            ->toJson();
+        //return datatables()->of(Project::all())->toJson();
     }
 }

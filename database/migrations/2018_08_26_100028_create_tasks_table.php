@@ -13,15 +13,21 @@ class CreateTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
-            $table->increments('id');
-            $table->char('title')->nullable();
-            $table->text('body')->nullable();
-            $table->integer('owner_id');
-            $table->boolean('status')->default('1');
-            $table->integer('feature_id');
-            $table->timestamps();
-        });
+        Schema::create(
+            'tasks', function (
+                Blueprint $table
+            ) {
+                $table->increments('id');
+                $table->char('title')->nullable();
+                $table->text('body')->nullable();
+                $table->integer('owner_id');
+                $table->integer('project_id');
+                $table->boolean('status')->default('1');
+                $table->boolean('closed')->default('0');
+                $table->integer('feature_id');
+                $table->timestamps();
+            }
+        );
     }
 
     /**

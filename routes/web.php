@@ -50,4 +50,8 @@ Route::get('/admin/data/statuses', 'DataController@statusesdata');
 Route::post('/admin/data/statuses', 'StatusController@store');
 Route::get('admin/projects/new', 'ProjectController@create')
     ->name('new.project');
+Route::get('admin/projects/show/{id}', 'ProjectController@show')
+    ->name('show.project');
 Route::post('/admin/projects/store', 'ProjectController@store');
+Route::get('/admin/data/projects', 'DataController@projectsdata');
+
