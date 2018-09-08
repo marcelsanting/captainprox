@@ -86,11 +86,9 @@ class DataController extends Controller
             )
             ->addColumn(
                 'statusname',
-
                 function (Project $project) {
                     return $project->currentstatus->title;
                 }
-
             )
             ->addColumn(
                 'progress',
