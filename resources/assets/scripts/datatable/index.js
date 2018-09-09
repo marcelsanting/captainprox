@@ -42,7 +42,7 @@ $(document).ready(function () {
             { "data": "owner" },
             { "data": "progress" },
             { "data": "statusname" },
-            { "data": "updated_at" },
+            { "data": "actions" },
         ],
         columnDefs: [ {
             targets: 3,

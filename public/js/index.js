@@ -77163,8 +77163,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**!
   // ------------------------------------------------------
 
   var drawSparklines = function drawSparklines() {
-    if (__WEBPACK_IMPORTED_MODULE_0_jquery__('#sparklinedash').length > 0) {
-      __WEBPACK_IMPORTED_MODULE_0_jquery__('#sparklinedash').sparkline([0, 5, 6, 10, 9, 12, 4, 9], {
+    if (__WEBPACK_IMPORTED_MODULE_0_jquery__('#sparklinedash1').length > 0) {
+      __WEBPACK_IMPORTED_MODULE_0_jquery__('#sparklinedash1').sparkline([0, 5, 6, 10, 9, 12, 4, 9], {
         type: 'bar',
         height: '20',
         barWidth: '3',
@@ -89228,7 +89228,7 @@ jQuery.fn.vectorMap('addMap', 'world_mill', { "insets": [{ "width": 900, "top": 
             "processing": true,
             "serverSide": true,
             "ajax": "/admin/data/projects",
-            "columns": [{ "data": "id" }, { "data": "title" }, { "data": "owner" }, { "data": "progress" }, { "data": "statusname" }, { "data": "updated_at" }],
+            "columns": [{ "data": "id" }, { "data": "title" }, { "data": "owner" }, { "data": "progress" }, { "data": "statusname" }, { "data": "actions" }],
             columnDefs: [{
                 targets: 3,
                 render: __WEBPACK_IMPORTED_MODULE_0_jquery__["fn"].dataTable.render.percentBar('round', '#FFF', '#269ABC', '#31B0D5', '#286090', 1, 'groove')

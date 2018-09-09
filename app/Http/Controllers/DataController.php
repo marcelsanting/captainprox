@@ -23,6 +23,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feature;
 use App\Models\Project;
 use App\User;
 use App\models\Status;
@@ -91,6 +92,16 @@ class DataController extends Controller
                 }
             )
             ->addColumn(
+                'actions',
+                function (Project $project) {
+                    return "<a href='".route('show.project', $project->id).
+                        "' class='btn btn-success'>Show</a>".
+                        "<a href='".url('delete.project', $project->id).
+                        "' class='btn btn-danger'>delete</a>";
+                }
+            )
+            ->rawColumns(['actions'])
+            ->addColumn(
                 'progress',
                 function (Project $project) {
                     $total = $project->tasks()
@@ -111,6 +122,22 @@ class DataController extends Controller
                 }
             )
             ->toJson();
-        //return datatables()->of(Project::all())->toJson();
+    }
+
+    /**
+     * Returns al list of all status data needed
+     *
+     * @param int $Id Project id
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function featuresbyID($Id)
+    {
+        return datatables()->of(
+            Feature::query()
+            ->where('project_id', '=', $Id)
+        )->toJson();
     }
 }

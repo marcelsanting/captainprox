@@ -88,4 +88,18 @@ class ProjectController extends Controller
 
         return redirect()->back();
     }
+
+
+    /**
+     * Shows the entire project in detail
+     *
+     * @param Project $project The project Model
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(Project $project)
+    {
+        return view('projects.projectdetail')
+            ->with(compact('project'));
+    }
 }

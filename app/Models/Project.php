@@ -88,4 +88,17 @@ class Project extends Model
         return $this->HasOne(Status::class, "id", 'status');
     }
 
+    /**
+     * Produces the percentage completed for the Project
+     *
+     * @return float|int
+     */
+    public function completed()
+    {
+        $total = $this->tasks()->count('id');
+        $taskComplete = $this->hasMany(Task::class)
+            ->where('closed', "=", '1')->count("closed");
+        return round($taskComplete/$total*100, '1');
+    }
+
 }
