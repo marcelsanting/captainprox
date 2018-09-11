@@ -24,6 +24,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -65,6 +66,10 @@ class RegistrationController extends Controller
         );
 
         $user = User::create(request(['name', 'email', 'password']));
+
+        $user
+            ->roles()
+            ->attach(Role::where('name', 'Developer')->first());
 
         Auth::login($user);
 

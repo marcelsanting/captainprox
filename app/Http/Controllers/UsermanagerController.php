@@ -24,6 +24,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Http\Request;
 
 /**
  * Class UsermanagerController
@@ -39,14 +40,23 @@ use App\User;
 class UsermanagerController extends Controller
 {
     /**
+     * DataController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    /**
      * Opens the UserAdministration View
      *
-     * @param User $user The User model object
+     * @param User    $user    The User model object
+     * @param Request $request Requesthandling
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(User $user)
+    public function index(User $user, Request $request)
     {
+        $request->user()->authorizeRoles(['Administrator']);
         return view('admin.usermanager');
     }
 }

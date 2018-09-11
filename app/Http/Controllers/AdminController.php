@@ -24,6 +24,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -48,10 +49,13 @@ class AdminController extends Controller
     /**
      * Loads the first page after login
      *
+     * @param Request $request Get Request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->authorizeRoles(['Administrator', 'Manager', 'Developer']);
         return view('admin.home', ["currrentuser" => User::find(Auth::id())]);
     }
 }
