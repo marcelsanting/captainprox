@@ -7,7 +7,6 @@
     </div>
     <div class="modal-body">
         {{ csrf_field() }}
-        <!-- input type="hidden" type="text" id="owner_id" name="owner_id" value="{{ Auth::user()->id }}"/ -->
         <input type="hidden" type="text" id="status" name="status" value="1"/>
 
         <div class="form-group">
@@ -33,7 +32,7 @@
         </div>
         <div class="form-group">
             <label for="body">Project summary:</label>
-            <textarea name="body" id="body" class="form-control" placeholder="Enter your project details..." rows="8" required>
+            <textarea name="body" id="body" class="form-control body-editor" placeholder="Enter your project details..." rows="8" required>
             </textarea>
             @if ($errors->has('body'))
                 <div class="alert alert-danger" role="alert">{{ $errors->first('body') }}</div>

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <h4 class="c-grey-900 mT-10 mB-30">Projects Overview</h4>
+        <h4 class="c-grey-900 mT-10 mB-30@lg">Projects Overview</h4>
         <div class="row">
             <div class="modal fade" id="addProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog" role="document">

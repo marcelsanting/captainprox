@@ -60,6 +60,9 @@ Route::get('/admin/data/statuses', 'DataController@statusesdata');
 Route::post('/admin/data/statuses', 'StatusController@store');
 
 /* Features */
-Route::get('/admin/data/features/{$id}', 'DataController@featuresbyID');
+Route::get('admin/features/show/{feature}', 'FeatureController@show')
+    ->name('show.feature');
+Route::post('/admin/feature/store', 'FeatureController@store');
+Route::get('/admin/data/features/{feature}', 'DataController@featuresbyID');
 
 

@@ -31,6 +31,6 @@ mix.webpackConfig({
                 loader: 'expose-loader',
                 options: '$'
             }]
-        }]
+        }],
     },
 });

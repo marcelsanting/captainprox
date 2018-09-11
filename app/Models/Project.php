@@ -98,6 +98,10 @@ class Project extends Model
         $total = $this->tasks()->count('id');
         $taskComplete = $this->hasMany(Task::class)
             ->where('closed', "=", '1')->count("closed");
+        if (!$total) {
+            return 0;
+        }
+
         return round($taskComplete/$total*100, '1');
     }
 

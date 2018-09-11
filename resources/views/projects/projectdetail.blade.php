@@ -1,8 +1,18 @@
 @extends('admin.backend')
 
 @section('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="modal fade" id="addFeature" tabindex="-1" role="dialog" aria-labelledby="addFeature" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        @include('projects.features.addfeature', ["project_id" => $project->id])
+                    </div>
+                </div>
+            </div>
+        </div>
             <h4>Project overview</h4>
-                <div class="row gap-20 masonry pos-r">
+                <div class="row gap-10 masonry pos-r">
                     <div class="masonry-sizer col-md-6"></div>
                     <div class="masonry-item  w-100">
                         <div class="row gap-20">
@@ -21,7 +31,7 @@
                                         </div>
                                         <div class="layer w-100">
                                             <p>
-                                                {{ $project->body }}
+                                                {!! $project->body !!}
                                             </p>
                                         </div>
                                     </div>
@@ -40,10 +50,12 @@
                                                     No features added
                                                 @endif
                                             </div>
-
                                             <!-- Pie Charts -->
                                             <div class="peers pT-20 mT-20 bdT fxw-nw@lg+ jc-sb ta-c gap-10">
                                                 @include('projects.assets.easy-pie', ['title' => "Project complete", "complete" => $project->completed()])
+                                            </div>
+                                            <div class="peers pT-20 mT-20 bdT fxw-nw@lg+ jc-sb ta-c gap-10">
+                                                <button class="btn btn-primary" data-toggle="modal" data-target="#addFeature">Create a new Feature</button>
                                             </div>
                                         </div>
                                     </div>
@@ -67,28 +79,25 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="#mytasks" role="tab" data-toggle="tab">Assigned to you</a>
                                                 </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#taskscomplete" role="tab" data-toggle="tab">All ccmpleted tasks</a>
-                                                </li>
                                             </ul>
                                         </div>
-                                        <div class="tab-content layer w-100 mB-10">
-                                            <div role="tabpanel" class="tab-pane fade in active" id="features">
+                                        <div class="tab-content layer w-100 mB-10" style="height:350px;">
+                                            <div role="tabpanel" class="tab-pane fade active" id="features">
                                                 @include(
                                                     'projects.assets.datatable',
                                                     ['tablename' => 'ProjectFeatures',
                                                         'heads' => [
                                                             'id',
                                                             'title',
+                                                            'progress',
                                                             'status',
-                                                            'last update'
-                                                        ]
-                                                    ]
+                                                            'actions'
+                                                        ],
+                                                    'element_id' => $project->id,                                                    ]
                                                 )
                                             </div>
                                             <div role="tabpanel" class="tab-pane fade" id="tasksopen">bbb</div>
                                             <div role="tabpanel" class="tab-pane fade" id="mytasks">ccc</div>
-                                            <div role="tabpanel" class="tab-pane fade" id="taskscomplete">ccc</div>
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +109,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
+          </div>
+    </div>
 @endsection

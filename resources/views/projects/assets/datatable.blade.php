@@ -1,4 +1,4 @@
-<table id="{{ $tablename }}" class="table table-striped table-bordered" cellspacing="0" width="100%">
+<table id="{{ $tablename }}" data-content="1" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
     <tr>
         @foreach($heads as $head)
@@ -14,3 +14,6 @@
     </tr>
     </tfoot>
 </table>
+<script type="text/javascript">
+    var element_id = '{{ $element_id }}';
+</script>

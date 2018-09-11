@@ -138,6 +138,27 @@ class DataController extends Controller
         return datatables()->of(
             Feature::query()
             ->where('project_id', '=', $Id)
-        )->toJson();
+        )
+            ->addColumn(
+                'statusname',
+                function (Feature $feature) {
+                    return $feature->currentstatus->title;
+                }
+            )
+            ->addColumn(
+                'progress',
+                function (Feature $feature) {
+                    return $feature->completed();
+                }
+            )
+            ->addColumn(
+                'actions',
+                function (Feature $feature) {
+                    return "<a href='".route('show.feature', $feature->id).
+                        "' class='btn btn-success'>Show</a>";
+                }
+            )
+            ->rawColumns(['actions'])
+            ->toJson();
     }
 }

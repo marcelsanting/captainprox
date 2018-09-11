@@ -73,6 +73,7 @@
         "npm": "^6.4.1",
         "perfect-scrollbar": "1.1.0",
         "popper.js": "1.12.6",
+        "simditor": "^2.3.19",
         "skycons": "1.0.0"
     }
 }

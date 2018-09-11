@@ -49,12 +49,21 @@ $(document).ready(function () {
             render: $.fn.dataTable.render.percentBar( 'round','#FFF', '#269ABC', '#31B0D5', '#286090', 1, 'groove' )
         } ]
     });
+    $('#ProjectFeatures').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax":"/admin/data/features/"+element_id,
+        "columns": [
+            { "data": "id" },
+            { "data": "title" },
+            { "data": "progress" },
+            { "data": "statusname" },
+            { "data": "actions" }
+        ],
+        columnDefs: [ {
+            targets: 2,
+            render: $.fn.dataTable.render.percentBar( 'round','#FFF', '#269ABC', '#31B0D5', '#286090', 1, 'groove' )
+        } ]
+    });
 });
-
-
-
-
-
-
-
 }());
