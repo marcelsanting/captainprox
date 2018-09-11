@@ -18,5 +18,19 @@ mix.styles([
 ], 'public/css/all.css')
 
 mix.js('resources/assets/scripts/index.js', 'public/js')
-    .sass('resources/assets/styles/index.scss', 'public/css');
+    .sass('resources/assets/styles/index.scss', 'public/css')
 
+mix.webpackConfig({
+    module: {
+        rules: [{
+            test: require.resolve('jquery'),
+            use: [{
+                loader: 'expose-loader',
+                options: 'jQuery'
+            },{
+                loader: 'expose-loader',
+                options: '$'
+            }]
+        }],
+    },
+});

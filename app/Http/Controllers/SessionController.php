@@ -63,19 +63,21 @@ Class SessionController extends Controller
     {
         $this->validate(
             $request, [
-            "name" => "required",
-            "password" => "required"
+                "name" => "required",
+                "password" => "required"
             ]
         );
 
         if (Auth::attempt(
             [
-            'name' => $request->name,
-            'password' => $request->password
+                'name' => $request->name,
+                'password' => $request->password
             ]
         )
         ) {
             return redirect('admin');
+        } else {
+            redirect('login');
         }
 
 
