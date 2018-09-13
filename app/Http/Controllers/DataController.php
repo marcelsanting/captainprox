@@ -51,20 +51,6 @@ class DataController extends Controller
     {
         $this->middleware('auth');
     }
-    /**
-     * Fetches all userdata
-     *
-     * @param Request $request The Request
-     *
-     * @return mixed
-     *
-     * @throws \Exception
-     */
-    public function userdata(Request $request)
-    {
-        $request->user()->authorizeRoles(['Administrator']);
-        return datatables()->of(User::all())->toJson();
-    }
 
     /**
      * Returns al list of all status data needed
