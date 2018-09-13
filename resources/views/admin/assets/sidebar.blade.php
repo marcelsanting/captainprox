@@ -61,7 +61,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li class="nav-item dropdown">
-                        <a href="{{route("users.index")}}">
+                        <a href="{{route("list.project")}}">
                             <span>Projects overview</span>
                         </a>
                     </li>
