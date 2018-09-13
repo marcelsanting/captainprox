@@ -25,6 +25,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\Facades\DataTables;
 
 /**
@@ -137,8 +138,11 @@ class UsermanagerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param \App\User $user User Model
+     *
+     * @return Redirect Index Route
+     *
+     * @throws \Exception
      */
     public function destroy(User $user)
     {

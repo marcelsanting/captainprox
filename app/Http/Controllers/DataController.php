@@ -25,11 +25,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Feature;
 use App\Models\Project;
-use App\User;
 use App\models\Status;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Class DataController
@@ -101,8 +99,9 @@ class DataController extends Controller
                         "' class='btn btn-success'>Show</a>";
                     $user = auth()->user();
 
-                    if ($user->hasRole(['Administrator']) || $user->id == $project->user_id)
-                    {
+                    if ($user->hasRole(['Administrator'])
+                        || $user->id == $project->user_id
+                    ) {
                         $show .= "<a href='".url('delete.project', $project->id).
                             "' class='btn btn-danger'>delete</a>";
                     }
