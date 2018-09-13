@@ -25,10 +25,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Feature;
 use App\Models\Project;
-use App\User;
 use App\models\Status;
+use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Class DataController
@@ -44,38 +43,40 @@ use Illuminate\Support\Facades\DB;
 class DataController extends Controller
 {
     /**
-     * Fetches all userdata
-     *
-     * @return mixed
-     *
-     * @throws \Exception
+     * DataController constructor.
      */
-    public function userdata()
+    public function __construct()
     {
-        return datatables()->of(User::all())->toJson();
+        $this->middleware('auth');
     }
 
     /**
      * Returns al list of all status data needed
      *
+     * @param Request $request The Request
+     *
      * @return mixed
      *
      * @throws \Exception
      */
-    public function statusesdata()
+    public function statusesdata(Request $request)
     {
+        $request->user()->authorizeRoles(['Administrator', 'Manager', 'Developer']);
         return datatables()->of(Status::all())->toJson();
     }
 
     /**
      * Returns al list of all projects data needed
      *
+     * @param Request $request The Request
+     *
      * @return mixed
      *
      * @throws \Exception
      */
-    public function projectsdata()
+    public function projectsdata(Request $request)
     {
+        $request->user()->authorizeRoles(['Administrator', 'Manager', 'Developer']);
         $model = Project::query();
 
         return DataTables::eloquent($model)
@@ -94,10 +95,17 @@ class DataController extends Controller
             ->addColumn(
                 'actions',
                 function (Project $project) {
-                    return "<a href='".route('show.project', $project->id).
-                        "' class='btn btn-success'>Show</a>".
-                        "<a href='".url('delete.project', $project->id).
-                        "' class='btn btn-danger'>delete</a>";
+                    $show = "<a href='".route('show.project', $project->id).
+                        "' class='btn btn-success'>Show</a>";
+                    $user = auth()->user();
+
+                    if ($user->hasRole(['Administrator'])
+                        || $user->id == $project->user_id
+                    ) {
+                        $show .= "<a href='".url('delete.project', $project->id).
+                            "' class='btn btn-danger'>delete</a>";
+                    }
+                    return $show;
                 }
             )
             ->rawColumns(['actions'])
@@ -127,14 +135,16 @@ class DataController extends Controller
     /**
      * Returns al list of all status data needed
      *
-     * @param int $Id Project id
+     * @param int     $Id      Project id
+     * @param Request $request The Request
      *
      * @return mixed
      *
      * @throws \Exception
      */
-    public function featuresbyID($Id)
+    public function featuresbyID($Id, Request $request)
     {
+        $request->user()->authorizeRoles(['Administrator', 'Manager', 'Developer']);
         return datatables()->of(
             Feature::query()
             ->where('project_id', '=', $Id)

@@ -36,14 +36,19 @@
                     <span class="title">Dashboard</span>
                 </a>
             </li>
+            @if(Auth::user()->hasRole('administrator'))
+            <!-- Administrator level -->
             <li class="nav-item">
-                <a class='sidebar-link' href="{{url('/admin/users')}}">
+                <a class='sidebar-link' href="{{route('users.index')}}">
                 <span class="icon-holder">
                   <i class="c-brown-500 ti-user"></i>
                 </span>
                     <span class="title">User Manager</span>
                 </a>
             </li>
+            <!-- Administrator level -->
+            @endif
+            @if(Auth::user()->hasAnyRole(['Developer']))
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                 <span class="icon-holder">
@@ -56,17 +61,22 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li class="nav-item dropdown">
-                        <a href="{{url("/admin/projects/list")}}">
+                        <a href="{{route("users.index")}}">
                             <span>Projects overview</span>
                         </a>
                     </li>
+                    @if(Auth::user()->hasRole('administrator'))
+                    <!-- Administrator level -->
                     <li class="nav-item dropdown">
                         <a href="{{url("/admin/projects/status/list")}}">
                             <span>Status configurator</span>
                         </a>
                     </li>
+                    <!-- Administrator level -->
+                    @endif
                 </ul>
             </li>
+            @endif
 
         </ul>
     </div>

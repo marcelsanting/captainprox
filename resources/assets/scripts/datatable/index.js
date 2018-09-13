@@ -15,7 +15,7 @@ $(document).ready(function () {
         "columns": [
             { "data": "name" },
             { "data": "email" },
-            { "data": "created_at" },
+            { "data": "actions" },
             { "data": "updated_at" },
         ]
     });

@@ -42,22 +42,44 @@ use App\Models\Project;
 class ProjectController extends Controller
 {
     /**
+     * AdminController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Returns the overview of the projects
+     *
+     * @param Request $request Get Request
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    Public function index()
+    Public function index(Request $request)
     {
+        $request->user()->authorizeRoles(
+            [
+                'Administrator', 'Manager', 'Developer'
+            ]
+        );
         return view('projects.index');
     }
 
     /**
      * Returns the new Project form
      *
+     * @param Request $request Get Request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
+        $request->user()->authorizeRoles(
+            [
+                'Administrator', 'Manager', 'Developer'
+            ]
+        );
         $statuses = Status::all();
 
         return view(
@@ -77,6 +99,11 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $request->user()->authorizeRoles(
+            [
+                'Administrator', 'Manager', 'Developer'
+            ]
+        );
         $this->validate(
             request(), [
                 "title" => "required|unique:projects",
@@ -94,11 +121,17 @@ class ProjectController extends Controller
      * Shows the entire project in detail
      *
      * @param Project $project The project Model
+     * @param Request $request Get Request
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Project $project)
+    public function show(Project $project, Request $request)
     {
+        $request->user()->authorizeRoles(
+            [
+                'Administrator', 'Manager', 'Developer'
+            ]
+        );
         return view('projects.projectdetail')
             ->with(compact('project'));
     }

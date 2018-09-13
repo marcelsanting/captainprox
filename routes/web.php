@@ -21,11 +21,14 @@ Auth::routes();
 /*
  * Here are the backend routes for the admin panel
  */
-Route::get('/admin', 'AdminController@index')
-    ->name('admin');
-Route::get('/admin/users', 'UsermanagerController@index')
-    ->name('usermanager');
-Route::get('/admin/data/users', 'DataController@userdata');
+Route::resources(
+    [
+    'users' => "UsermanagerController",
+    ]
+);
+
+Route::get('/admin', 'AdminController@index');
+Route::get('/admin/data/users', 'UsermanagerController@userdata');
 
 
 /*

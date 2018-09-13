@@ -20,10 +20,13 @@
  * @link      https://github.com/marcelsanting/captainprox
  * @since     File available since Release 1.0.0
  */
-
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Yajra\DataTables\Facades\DataTables;
 
 /**
  * Class UsermanagerController
@@ -38,15 +41,140 @@ use App\User;
  */
 class UsermanagerController extends Controller
 {
+
+    /**
+     * DataController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Opens the UserAdministration View
      *
-     * @param User $user The User model object
+     * @param Request $request Requesthandling
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(User $user)
+    public function index(Request $request)
     {
-        return view('admin.usermanager');
+        $request->user()->authorizeRoles(['Administrator']);
+        return view('users.usermanager');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request Fetches the Request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param \App\User $user The User Model
+     * @param Role      $role Roles of users
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user, Role $role)
+    {
+        return View(
+            'users.user_show', [
+            'user' => $user,
+            'roles' => $role::all(),
+            ]
+        );
+    }
+
+    /**
+     * Show the user resource.
+     *
+     * @param \App\User $user User model
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request the Request
+     * @param \App\User                $user    The User model
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, User $user)
+    {
+        $user->roles()->sync([]);
+        $roles = $request->request->get("role");
+
+        foreach ($roles as $role) {
+            $user->roles()->attach($role);
+        }
+
+        return redirect()->back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \App\User $user User Model
+     *
+     * @return Redirect Index Route
+     *
+     * @throws \Exception
+     */
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('users.index');
+    }
+
+    /**
+     * Fetches all userdata
+     *
+     * @param Request $request The Request
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function userdata(Request $request)
+    {
+        $request->user()->authorizeRoles(['Administrator']);
+
+        $model = User::query();
+
+        return DataTables::eloquent($model)
+            ->addColumn(
+                'actions',
+                function (User $user) {
+                    $show = "<a href='".route('users.edit', $user->id).
+                        "' class='btn btn-success'>Edit</a>";
+                    return $show;
+                }
+            )
+            ->rawColumns(['actions'])
+            ->toJson();
     }
 }

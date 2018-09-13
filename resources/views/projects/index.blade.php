@@ -16,7 +16,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="bgc-white bd bdrs-3 p-20 mB-20">
+                    @if(Auth::user()->hasRole(['administrator', 'Manager']))
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProject">Add new project</button>
+                    @endif
                     <hr />
                     <table id="ProjectTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>

@@ -54,9 +54,11 @@
                                             <div class="peers pT-20 mT-20 bdT fxw-nw@lg+ jc-sb ta-c gap-10">
                                                 @include('projects.assets.easy-pie', ['title' => "Project complete", "complete" => $project->completed()])
                                             </div>
+                                            @if(Auth::user()->hasAnyRole(['administrator', 'Developer', 'Manager']))
                                             <div class="peers pT-20 mT-20 bdT fxw-nw@lg+ jc-sb ta-c gap-10">
                                                 <button class="btn btn-primary" data-toggle="modal" data-target="#addFeature">Create a new Feature</button>
                                             </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
