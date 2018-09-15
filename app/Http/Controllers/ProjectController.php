@@ -25,6 +25,8 @@ namespace App\Http\Controllers;
 use App\models\Status;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Support\Facades\Redirect;
+use Yajra\DataTables\Facades\DataTables;
 
 /**
  * Class ProjectController
@@ -47,6 +49,26 @@ class ProjectController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware(
+            'roles:Developer',
+            [
+            'only' => [
+                'index',
+                'show',
+                'projectsdata'
+                ]
+            ]
+        );
+        $this->middleware(
+            'roles:Manager',
+            [
+                'only' => [
+                    'create',
+                    'store',
+                    'destroy'
+                ]
+            ]
+        );
     }
 
     /**
@@ -58,11 +80,6 @@ class ProjectController extends Controller
      */
     Public function index(Request $request)
     {
-        $request->user()->authorizeRoles(
-            [
-                'Administrator', 'Manager', 'Developer'
-            ]
-        );
         return view('projects.index');
     }
 
@@ -75,17 +92,12 @@ class ProjectController extends Controller
      */
     public function create(Request $request)
     {
-        $request->user()->authorizeRoles(
-            [
-                'Administrator', 'Manager', 'Developer'
-            ]
-        );
         $statuses = Status::all();
 
         return view(
-            'projects.addproject',
+            'projects.add_project',
             [
-                "statuses" => $statuses
+                'statuses' => $statuses
             ]
         );
     }
@@ -99,16 +111,11 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $request->user()->authorizeRoles(
-            [
-                'Administrator', 'Manager', 'Developer'
-            ]
-        );
         $this->validate(
             request(), [
-                "title" => "required|unique:projects",
-                "body" => "required",
-                "user_id" => "required"
+                'title' => 'required|unique:projects',
+                'body' => 'required',
+                'user_id' => 'required'
             ]
         );
         Project::create(request(['title', 'body', 'user_id']));
@@ -127,12 +134,82 @@ class ProjectController extends Controller
      */
     public function show(Project $project, Request $request)
     {
-        $request->user()->authorizeRoles(
-            [
-                'Administrator', 'Manager', 'Developer'
-            ]
-        );
-        return view('projects.projectdetail')
+        return view('projects.project_detail')
             ->with(compact('project'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \App\Models\Project $project Project Model
+     *
+     * @return Redirect Index Route
+     *
+     * @throws \Exception
+     */
+    public function destroy(Project $project)
+    {
+        $project->delete();
+        return redirect()->route('projects.index');
+    }
+
+    /**
+     * Returns al list of all projects data needed
+     *
+     * @param Request $request The Request
+     *
+     * @return mixed
+     */
+    public function projectsdata(Request $request)
+    {
+        $request->user()->authorizeRoles(['Developer']);
+        $model = Project::query();
+
+        return DataTables::eloquent($model)
+            ->addColumn(
+                'owner',
+                function (Project $project) {
+                    return $project->owner->name;
+                }
+            )
+            ->addColumn(
+                'statusname',
+                function (Project $project) {
+                    return $project->currentstatus->title;
+                }
+            )
+            ->addColumn(
+                'actions',
+                function (Project $project) {
+                    return (string) view(
+                        'projects.partials.datatables.actions',
+                        [
+                        'project' => $project
+                        ]
+                    );
+                }
+            )
+            ->rawColumns(['actions'])
+            ->addColumn(
+                'progress',
+                function (Project $project) {
+                    $total = $project->tasks()
+                        ->count('closed');
+                    $done = $project->tasks()
+                        ->where(
+                            'closed',
+                            '=',
+                            '1'
+                        )
+                        ->count('closed');
+                    $all = $total + $done;
+                    if (!$total) {
+                        return 0;
+                    }
+
+                    return $done/$all*100;
+                }
+            )
+            ->toJson();
     }
 }

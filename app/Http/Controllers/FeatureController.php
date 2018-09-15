@@ -43,6 +43,25 @@ use App\Models\Feature;
 class FeatureController extends Controller
 {
     /**
+     * AdminController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(
+            'roles:Developer',
+            [
+                'only' => [
+                    'index',
+                    'show',
+                    'projectsdata',
+                    'create',
+                    'store'
+                ]
+            ]
+        );
+    }
+    /**
      * Returns the overview of the projects
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -62,9 +81,9 @@ class FeatureController extends Controller
         $statuses = Status::all();
 
         return view(
-            'projects.features.addfeature',
+            'projects.features.add_feature',
             [
-                "statuses" => $statuses
+                'statuses' => $statuses
             ]
         );
     }
@@ -80,9 +99,9 @@ class FeatureController extends Controller
     {
         $this->validate(
             request(), [
-                "title" => "required|unique:projects",
-                "body" => "required",
-                "user_id" => "required"
+                'title' => 'required|unique:projects',
+                'body' => 'required',
+                'user_id' => 'required'
             ]
         );
         Feature::create(request(['title', 'body', 'user_id', 'project_id']));
@@ -100,7 +119,7 @@ class FeatureController extends Controller
      */
     public function show(Feature $feature)
     {
-        return view('projects.features.featuredetail')
+        return view('projects.features.feature_detail')
             ->with(compact('feature'));
     }
 }

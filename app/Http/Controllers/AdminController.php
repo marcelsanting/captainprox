@@ -44,6 +44,7 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('roles:Developer', ['only' => ['index']]);
     }
 
     /**
@@ -55,7 +56,6 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['Administrator', 'Manager', 'Developer']);
-        return view('admin.home', ["currrentuser" => User::find(Auth::id())]);
+        return view('admin.home', ['currrentuser' => User::find(Auth::id())]);
     }
 }

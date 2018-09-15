@@ -89,6 +89,22 @@
                     </div>
                 </div>
             </div>
+            <div class="tab-content layer w-100 mB-10" style="height:350px;">
+                <div class="bd bgc-white">
+                    @include(
+                    'projects.assets.datatable',
+                        ['tablename' => 'UsersTasks',
+                            'heads' => [
+                            'id',
+                            'title',
+                            'status',
+                            'actions'
+                            ],
+                    'element_id' => $user->id,
+                        ]
+                    )
+                </div>
+            </div>
         </div>
     </div>
 @endsection
