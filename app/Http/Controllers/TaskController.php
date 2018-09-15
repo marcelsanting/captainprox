@@ -41,6 +41,28 @@ use Illuminate\Http\Request;
  */
 class TaskController extends Controller
 {
+
+    /**
+     * TaskController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(
+            'roles:Developer',
+            [
+                'only' => [
+                    'index',
+                    'show',
+                    'projectsdata',
+                    'create',
+                    'store',
+                    'destroy',
+                    'tasksbyUser'
+                ]
+            ]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -174,7 +196,7 @@ class TaskController extends Controller
     ) {
         $request->user()->authorizeRoles(['Developer']);
         return datatables()->of(
-            Task::query()->where('project_id', '=', $project->id)->get()
+            $project->tasks()->whereClosed('0')
         )
             ->addColumn(
                 'statusname',
@@ -207,9 +229,8 @@ class TaskController extends Controller
         User $user,
         Request $request
     ) {
-        $request->user()->authorizeRoles(['Developer']);
         return datatables()->of(
-            Task::query()->where('project_id', '=', $user->id)->get()
+            $user->tasks()->whereClosed('0')
         )
             ->addColumn(
                 'statusname',
