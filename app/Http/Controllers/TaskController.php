@@ -1,5 +1,25 @@
 <?php
-
+/**
+ * TaskController
+ *
+ * TaskController handles every possible way of a task
+ *
+ * PHP version 7
+ *
+ * LICENSE: This source file is subject to the MIT license
+ * that is available through the world-wide-web at the following URI:
+ * https://opensource.org/licenses/MIT
+ *
+ * @category  LaravelProject
+ * @package   ProxCMS
+ * @author    Original Author <author@example.com>
+ * @author    Marcel Santing <marcel@prox-web.nl>
+ * @copyright 2018 Prox-Web
+ * @license   https://opensource.org/licenses/MIT  MIT License
+ * @version   SVN: $Id$
+ * @link      https://github.com/marcelsanting/captainprox
+ * @since     File available since Release 1.0.0
+ */
 namespace App\Http\Controllers;
 
 use App\Models\Feature;
@@ -8,6 +28,17 @@ use App\Models\Project;
 use App\User;
 use Illuminate\Http\Request;
 
+/**
+ * Class TaskController
+ *
+ * @category  Controller
+ * @package   App\Http\Controllers
+ * @author    Original Author <author@example.com>
+ * @author    Marcel Santing <marcel@prox-web.nl>
+ * @copyright 2018 Prox-Web
+ * @license   https://opensource.org/licenses/MIT  MIT License
+ * @link      https://github.com/marcelsanting/captainproxessionController
+ */
 class TaskController extends Controller
 {
     /**
@@ -17,7 +48,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        Return response();
     }
 
     /**
@@ -27,63 +58,68 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        Return response();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request Request handler
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        Return response();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Task  $task
+     * @param \App\Models\Task $task Task model
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Task $task)
     {
-        //
+        Return response();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Task  $task
+     * @param \App\Models\Task $task Task model
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Task $task)
     {
-        //
+        Return response();
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Task  $task
+     * @param \Illuminate\Http\Request $request Requesthandler
+     * @param \App\Models\Task         $task    Task model
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Task $task)
     {
-        //
+        Return response();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Task  $task
+     * @param \App\Models\Task $task Task model
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Task $task)
     {
-        //
+        Return response();
     }
 
     /**
