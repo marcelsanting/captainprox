@@ -1,6 +1,6 @@
 <!Doctype html>
 <html>
-    @include('layouts.htmlheader')
+    @include('layouts.html_header')
 
 <body class="app">
 <!-- @TOC -->

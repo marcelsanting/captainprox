@@ -65,72 +65,7 @@ class DataController extends Controller
         return datatables()->of(Status::all())->toJson();
     }
 
-    /**
-     * Returns al list of all projects data needed
-     *
-     * @param Request $request The Request
-     *
-     * @return mixed
-     *
-     * @throws \Exception
-     */
-    public function projectsdata(Request $request)
-    {
-        $request->user()->authorizeRoles(['Administrator', 'Manager', 'Developer']);
-        $model = Project::query();
 
-        return DataTables::eloquent($model)
-            ->addColumn(
-                'owner',
-                function (Project $project) {
-                    return $project->owner->name;
-                }
-            )
-            ->addColumn(
-                'statusname',
-                function (Project $project) {
-                    return $project->currentstatus->title;
-                }
-            )
-            ->addColumn(
-                'actions',
-                function (Project $project) {
-                    $show = "<a href='".route('show.project', $project->id).
-                        "' class='btn btn-success'>Show</a>";
-                    $user = auth()->user();
-
-                    if ($user->hasRole(['Administrator'])
-                        || $user->id == $project->user_id
-                    ) {
-                        $show .= "<a href='".url('delete.project', $project->id).
-                            "' class='btn btn-danger'>delete</a>";
-                    }
-                    return $show;
-                }
-            )
-            ->rawColumns(['actions'])
-            ->addColumn(
-                'progress',
-                function (Project $project) {
-                    $total = $project->tasks()
-                        ->count("closed");
-                    $done = $project->tasks()
-                        ->where(
-                            "closed",
-                            "=",
-                            "1"
-                        )
-                        ->count("closed");
-                    $all = $total + $done;
-                    if (!$total) {
-                        return 0;
-                    }
-
-                    return $done/$all*100;
-                }
-            )
-            ->toJson();
-    }
 
     /**
      * Returns al list of all status data needed
@@ -142,7 +77,7 @@ class DataController extends Controller
      *
      * @throws \Exception
      */
-    public function featuresbyID($Id, Request $request)
+    public function tasksbyFeature($Id, Request $request)
     {
         $request->user()->authorizeRoles(['Administrator', 'Manager', 'Developer']);
         return datatables()->of(
@@ -164,7 +99,47 @@ class DataController extends Controller
             ->addColumn(
                 'actions',
                 function (Feature $feature) {
-                    return "<a href='".route('show.feature', $feature->id).
+                    return "<a href='".route('features.show', $feature->id).
+                        "' class='btn btn-success'>Show</a>";
+                }
+            )
+            ->rawColumns(['actions'])
+            ->toJson();
+    }
+
+    /**
+     * Returns al list of all status data needed
+     *
+     * @param int     $Id      Project id
+     * @param Request $request The Request
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function featuresbyID($Id, Request $request)
+    {
+        $request->user()->authorizeRoles(['Administrator', 'Manager', 'Developer']);
+        return datatables()->of(
+            Feature::query()
+                ->where('project_id', '=', $Id)
+        )
+            ->addColumn(
+                'statusname',
+                function (Feature $feature) {
+                    return $feature->currentstatus->title;
+                }
+            )
+            ->addColumn(
+                'progress',
+                function (Feature $feature) {
+                    return $feature->completed();
+                }
+            )
+            ->addColumn(
+                'actions',
+                function (Feature $feature) {
+                    return "<a href='".route('features.show', $feature->id).
                         "' class='btn btn-success'>Show</a>";
                 }
             )

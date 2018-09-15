@@ -60,7 +60,7 @@ class UsermanagerController extends Controller
     public function index(Request $request)
     {
         $request->user()->authorizeRoles(['Administrator']);
-        return view('users.usermanager');
+        return view('users.user_index');
     }
 
     /**
@@ -169,8 +169,8 @@ class UsermanagerController extends Controller
             ->addColumn(
                 'actions',
                 function (User $user) {
-                    $show = "<a href='".route('users.edit', $user->id).
-                        "' class='btn btn-success'>Edit</a>";
+                    $show = '<a href="'.route('users.edit', $user->id).
+                        '" class="btn btn-success">Edit</a>';
                     return $show;
                 }
             )

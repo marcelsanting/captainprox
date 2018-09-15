@@ -23,13 +23,21 @@ Auth::routes();
  */
 Route::resources(
     [
-    'users' => "UsermanagerController",
+    'users' => 'UsermanagerController',
+    'tasks' => 'TaskController',
+    'features' => 'FeatureController',
+    'projects' => 'ProjectController',
     ]
 );
 
+/* Datatable routes */
 Route::get('/admin', 'AdminController@index');
 Route::get('/admin/data/users', 'UsermanagerController@userdata');
-
+Route::get('/admin/data/feature/tasks/{feature}', 'TaskController@tasksbyFeature');
+Route::get('/admin/data/project/tasks/{project}', 'TaskController@tasksbyProject');
+Route::get('/admin/data/user/tasks/{user}', 'TaskController@tasksbyUser');
+Route::get('/admin/data/features/{feature}', 'DataController@featuresbyID');
+Route::get('/admin/data/projects', 'ProjectController@projectsdata');
 
 /*
  * Specific routes for the logged user
@@ -42,30 +50,10 @@ Route::get('/register', 'RegistrationController@create')
 Route::post('/register', 'RegistrationController@store');
 Route::get('/signoff', 'SessionController@destroy');
 
-/*
- * Specific routes for the Project Manager
- */
-
-/* Project */
-Route::get('/admin/projects/list', 'ProjectController@index')
-    ->name('list.project');
-Route::get('admin/projects/show/{project}', 'ProjectController@show')
-    ->name('show.project');
-Route::get('admin/projects/new', 'ProjectController@create')
-    ->name('new.project');
-Route::get('/admin/data/projects', 'DataController@projectsdata');
-Route::post('/admin/projects/store', 'ProjectController@store');
-
 /* Status */
 Route::get('/admin/projects/status/list', 'StatusController@index')
     ->name('list.status');
 Route::get('/admin/data/statuses', 'DataController@statusesdata');
 Route::post('/admin/data/statuses', 'StatusController@store');
-
-/* Features */
-Route::get('admin/features/show/{feature}', 'FeatureController@show')
-    ->name('show.feature');
-Route::post('/admin/feature/store', 'FeatureController@store');
-Route::get('/admin/data/features/{feature}', 'DataController@featuresbyID');
 
 

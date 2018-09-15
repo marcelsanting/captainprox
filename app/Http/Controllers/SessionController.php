@@ -63,8 +63,8 @@ Class SessionController extends Controller
     {
         $this->validate(
             $request, [
-                "name" => "required",
-                "password" => "required"
+                'name' => 'required',
+                'password' => 'required'
             ]
         );
 
