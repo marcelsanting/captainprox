@@ -40,5 +40,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TaskComment extends Model
 {
-    //
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'body',
+        'user_id',
+        'task_id'
+    ];
 }

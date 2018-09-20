@@ -23,10 +23,11 @@ Auth::routes();
  */
 Route::resources(
     [
-    'users' => 'UsermanagerController',
-    'tasks' => 'TaskController',
-    'features' => 'FeatureController',
-    'projects' => 'ProjectController',
+        'users' => 'UsermanagerController',
+        'tasks' => 'TaskController',
+        'features' => 'FeatureController',
+        'projects' => 'ProjectController',
+        'comments' => 'CommentController',
     ]
 );
 

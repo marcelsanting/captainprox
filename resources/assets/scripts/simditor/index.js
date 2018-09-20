@@ -9,4 +9,12 @@ $( document ).ready(function() {
         });
     }
 });
+$( document ).ready(function() {
+    if( $('.body-editor2').length ) {
+        var editor = new Simditor({
+            textarea: $('.body-editor2')
+            //optional options
+        });
+    }
+});
 

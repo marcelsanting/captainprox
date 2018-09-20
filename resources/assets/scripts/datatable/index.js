@@ -56,7 +56,7 @@ $(document).ready(function () {
     $('#ProjectFeatures').DataTable({
             'processing': true,
             'serverSide': true,
-            'ajax': '/admin/data/features/' + element_id,
+            'ajax': '/admin/data/features/' + project_id,
             'columns': [
                 {'data': 'id'},
                 {'data': 'title'},
@@ -69,11 +69,11 @@ $(document).ready(function () {
                 render: $.fn.dataTable.render.percentBar('round', '#FFF', '#269ABC', '#31B0D5', '#286090', 1, 'groove')
             }]
         });
-    if ( typeof element_id !== 'undefined')  {
+    if ( typeof project_id !== 'undefined')  {
         $('#FeatureTasks').DataTable({
             'processing': true,
             'serverSide': true,
-            'ajax': '//admin/data/feature/tasks/' + element_id,
+            'ajax': '//admin/data/feature/tasks/' + project_id,
             'columns': [
                 {'data': 'id'},
                 {'data': 'title'},
@@ -84,7 +84,7 @@ $(document).ready(function () {
         $('#ProjectTasks').DataTable({
             'processing': true,
             'serverSide': true,
-            'ajax': '/admin/data/project/tasks/' + element_id,
+            'ajax': '/admin/data/project/tasks/' + project_id,
             'columns': [
                 {'data': 'id'},
                 {'data': 'title'},
@@ -95,7 +95,7 @@ $(document).ready(function () {
         $('#UsersTasks').DataTable({
             'processing': true,
             'serverSide': true,
-            'ajax': '/admin/data/user/tasks/' + element_id,
+            'ajax': '/admin/data/user/tasks/' + user_id,
             'columns': [
                 {'data': 'id'},
                 {'data': 'title'},

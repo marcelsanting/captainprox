@@ -23,6 +23,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feature;
+use App\models\Status;
 use App\Models\Task;
 use App\Models\Project;
 use App\User;
@@ -104,7 +105,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        Return response();
+        Return view('projects.tasks.task_detail');
     }
 
     /**
@@ -116,7 +117,15 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        Return response();
+        $statuses = Status::all('id', 'title');
+        $users = User::all('id', 'name');
+        Return view(
+            'projects.tasks.task_detail', [
+                'task' => $task,
+                'statuses' => $statuses,
+                'users' => $users
+            ]
+        );
     }
 
     /**

@@ -15,5 +15,6 @@
     </tfoot>
 </table>
 <script type="text/javascript">
-    var element_id = '{{ $element_id }}';
+    var project_id = '{{ $project_id }}';
+    var user_id = '{{ $user_id }}';
 </script>
