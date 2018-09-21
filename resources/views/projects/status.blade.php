@@ -9,7 +9,7 @@
                 <div class="bgc-white bd bdrs-3 p-20 mB-20">
                     <h6 class="c-grey-900">Add a new Status</h6>
                     <hr />
-                    <form method="post" action="{{url('/admin/data/statuses')}}">
+                    <form method="post" action="{{route('statuses.store')}}">
                         {{ csrf_field() }}
                         <div class="form-group col-md-2">
                             <input type="text" class="form-control" id="title" name="title" placeholder="Set Task title" required/>

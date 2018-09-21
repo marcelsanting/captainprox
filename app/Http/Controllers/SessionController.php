@@ -24,6 +24,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSessionPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -55,18 +56,13 @@ Class SessionController extends Controller
     /**
      * Validates the user and login
      *
-     * @param Request $request Some comment
+     * @param StoreSessionPost $request Form handler
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(StoreSessionPost $request)
     {
-        $this->validate(
-            $request, [
-                'name' => 'required',
-                'password' => 'required'
-            ]
-        );
+        $validated = $request->validated();
 
         if (Auth::attempt(
             [
@@ -77,7 +73,7 @@ Class SessionController extends Controller
         ) {
             return redirect('admin');
         } else {
-            redirect('login');
+            return redirect('login');
         }
 
 

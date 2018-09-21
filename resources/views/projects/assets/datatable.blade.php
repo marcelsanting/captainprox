@@ -15,5 +15,12 @@
     </tfoot>
 </table>
 <script type="text/javascript">
-    var element_id = '{{ $element_id }}';
+    window.addEventListener('DOMContentLoaded', function() {
+        (function($) {
+            $(document).ready(function() {
+                DataTablebuilder('{{$tablename}}', '{{ $route }}', {{ $progressbar }});
+            });
+        })(jQuery);
+    });
+
 </script>

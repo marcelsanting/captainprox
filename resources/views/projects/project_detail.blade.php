@@ -84,18 +84,20 @@
                                             </ul>
                                         </div>
                                         <div class="tab-content layer w-100 mB-10" style="height:350px;">
-                                            <div role="tabpanel" class="tab-pane fade active" id="features">
+                                            <div role="tabpanel" class="tab-pane fade" id="features">
                                                 @include(
                                                     'projects.assets.datatable',
                                                     ['tablename' => 'ProjectFeatures',
                                                         'heads' => [
-                                                            'id',
-                                                            'title',
-                                                            'progress',
-                                                            'status',
-                                                            'actions'
+                                                            'ID',
+                                                            'Feature',
+                                                            'Status',
+                                                            'Actions'
                                                         ],
-                                                    'element_id' => $project->id,                                                    ]
+                                                    'search_id' => auth()->user()->id,
+                                                    'route' => route('projects.features', $project->id),
+                                                    'progressbar' => true,
+                                                    ]
                                                 )
                                             </div>
                                             <div role="tabpanel" class="tab-pane fade" id="tasksopen">
@@ -108,7 +110,9 @@
                                                             'status',
                                                             'actions'
                                                         ],
-                                                    'element_id' => $project->id,                                                    ]
+                                                    'route' => route('tasks.project', $project->id),
+                                                    'progressbar' => false,
+                                                    ]
                                                 )
                                             </div>
                                             <div role="tabpanel" class="tab-pane fade" id="mytasks">@include(
@@ -120,7 +124,10 @@
                                                             'status',
                                                             'actions'
                                                         ],
-                                                    'element_id' => Auth::user()->id,                                                    ]
+                                                    'search_id' => auth()->user()->id,
+                                                    'route' => route('tasks.user', auth()->user()->id),
+                                                    'progressbar' => false,
+                                                    ]
                                                 )</div>
                                         </div>
                                     </div>

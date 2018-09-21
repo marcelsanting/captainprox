@@ -68,7 +68,7 @@
                     @if(Auth::user()->hasRole('administrator'))
                     <!-- Administrator level -->
                     <li class="nav-item dropdown">
-                        <a href="{{url("/admin/projects/status/list")}}">
+                        <a href="{{route('statuses.index')}}">
                             <span>Status configurator</span>
                         </a>
                     </li>

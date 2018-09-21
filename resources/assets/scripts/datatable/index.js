@@ -1,4 +1,5 @@
-import * as $ from 'jquery';
+//import * as $ from 'jquery';
+let $ = require("jquery");
 import 'datatables';
 import 'datatables.net-dt'
 import 'datatables.net-dt/css/jquery.datatables.css';
@@ -53,10 +54,41 @@ $(document).ready(function () {
             render: $.fn.dataTable.render.percentBar( 'round','#FFF', '#269ABC', '#31B0D5', '#286090', 1, 'groove' )
         } ]
     });
+    function DataTablebuilder(table, route, progress = false) {
+        if(progress === false){
+            var columns = [
+                {'data': 'id'},
+                {'data': 'title'},
+                {'data': 'statusname'},
+                {'data': 'actions'}
+            ];
+        }else {
+            var columns = [
+                { 'data': 'id' },
+                { 'data': 'progress' },
+                { 'data': 'statusname' },
+                { 'data': 'actions' }
+            ]
+        }
+
+        $('#' + table).DataTable({
+            'processing': true,
+            'serverSide': true,
+            'ajax': route,
+            'columns': columns,
+            columnDefs: [{
+                'targets': 'progress',
+                'render' : $.fn.dataTable.render.percentBar('round', '#FFF', '#269ABC', '#31B0D5', '#286090', 1, 'groove')
+            }]
+        });
+    }
+
+    window.DataTablebuilder = DataTablebuilder // function a is now exported to the globals.
+    /*
     $('#ProjectFeatures').DataTable({
             'processing': true,
             'serverSide': true,
-            'ajax': '/admin/data/features/' + element_id,
+            'ajax': '/admin/data/features/' + search_id,
             'columns': [
                 {'data': 'id'},
                 {'data': 'title'},
@@ -69,11 +101,10 @@ $(document).ready(function () {
                 render: $.fn.dataTable.render.percentBar('round', '#FFF', '#269ABC', '#31B0D5', '#286090', 1, 'groove')
             }]
         });
-    if ( typeof element_id !== 'undefined')  {
         $('#FeatureTasks').DataTable({
             'processing': true,
             'serverSide': true,
-            'ajax': '//admin/data/feature/tasks/' + element_id,
+            'ajax': '//admin/data/feature/tasks/' + search_id,
             'columns': [
                 {'data': 'id'},
                 {'data': 'title'},
@@ -84,7 +115,7 @@ $(document).ready(function () {
         $('#ProjectTasks').DataTable({
             'processing': true,
             'serverSide': true,
-            'ajax': '/admin/data/project/tasks/' + element_id,
+            'ajax': '/admin/data/project/tasks/' + search_id,
             'columns': [
                 {'data': 'id'},
                 {'data': 'title'},
@@ -95,7 +126,7 @@ $(document).ready(function () {
         $('#UsersTasks').DataTable({
             'processing': true,
             'serverSide': true,
-            'ajax': '/admin/data/user/tasks/' + element_id,
+            'ajax': '/admin/data/user/tasks/' + search_id,
             'columns': [
                 {'data': 'id'},
                 {'data': 'title'},
@@ -103,7 +134,7 @@ $(document).ready(function () {
                 {'data': 'actions'}
             ],
         });
-    }
+        */
 
 });
 }());
