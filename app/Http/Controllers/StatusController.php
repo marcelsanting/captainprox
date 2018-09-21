@@ -79,6 +79,21 @@ class StatusController extends Controller
 
         Status::create(request(["title"]));
 
-        redirect()->back();
+        return redirect()->back();
+    }
+
+    /**
+     * Returns al list of all status data needed
+     *
+     * @param Request $request The Request
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function statusesdata(Request $request)
+    {
+        $request->user()->authorizeRoles(['Administrator', 'Manager', 'Developer']);
+        return datatables()->of(Status::all())->toJson();
     }
 }

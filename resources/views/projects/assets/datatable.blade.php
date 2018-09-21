@@ -15,6 +15,12 @@
     </tfoot>
 </table>
 <script type="text/javascript">
-    var project_id = '{{ $project_id }}';
-    var user_id = '{{ $user_id }}';
+    window.addEventListener('DOMContentLoaded', function() {
+        (function($) {
+            $(document).ready(function() {
+                DataTablebuilder('{{$tablename}}', '{{ $route }}', {{ $progressbar }});
+            });
+        })(jQuery);
+    });
+
 </script>

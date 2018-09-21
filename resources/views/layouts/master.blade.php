@@ -22,7 +22,7 @@
 <div id='loader'>
     <div class="spinner"></div>
 </div>
-<script src="{{ asset('js/index.js') }}" defer></script>
+
 <script>
     window.addEventListener('load', () => {
         const loader = document.getElementById('loader');
@@ -36,10 +36,7 @@
 <div>
 @yield('page')
 </div>
-
-
-
+<script src="{{ asset('js/index.js') }}" defer></script>
 @include('layouts.javascript')
-
 </body>
 </html>

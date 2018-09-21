@@ -100,8 +100,8 @@
                             'status',
                             'actions'
                             ],
-                    'element_id' => $user->id,
-                        ]
+                    'route' => route('tasks.user', auth()->user()->id),
+                    ]
                     )
                 </div>
             </div>

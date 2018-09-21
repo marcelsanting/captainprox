@@ -24,7 +24,8 @@ class StoreSessionPost extends FormRequest
     public function rules()
     {
         return [
-            'body' => 'required',
+            'name' => 'required',
+            'password' => 'required',
         ];
     }
 }

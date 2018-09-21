@@ -27,6 +27,7 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Feature;
 
+
 /**
  * Class FeatureController
  *
@@ -121,5 +122,51 @@ class FeatureController extends Controller
     {
         return view('projects.features.feature_detail')
             ->with(compact('feature'));
+    }
+
+    /**
+     * Returns al list of all status data needed
+     *
+     * @param Project $project Project id
+     * @param Request $request The Request
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function featuresbyID(Project $project, Request $request)
+    {
+        $request->user()->authorizeRoles(['Administrator', 'Manager', 'Developer']);
+        return datatables()->of(
+            Feature::query()
+                ->where('project_id', '=', $project->id)
+        )
+            ->addColumn(
+                'statusname',
+                function (Feature $feature) {
+                    return $feature->currentstatus->title;
+                }
+            )
+            ->addColumn(
+                'progress',
+                function (Feature $feature) {
+                    return view(
+                        'projects.assets.feature_progress',
+                        [
+                            'title' => $feature->title,
+                            'complete' => $feature->completed(),
+                        ]
+                    );
+                }
+            )
+            ->addColumn(
+                'actions',
+                function (Feature $feature) {
+                    return "<a href='".route('features.show', $feature->id).
+                        "' class='btn btn-success'>Show</a>";
+                }
+            )
+            ->rawColumns(['progress','actions'])
+            ->toJson();
     }
 }

@@ -89,14 +89,14 @@
                                                     'projects.assets.datatable',
                                                     ['tablename' => 'ProjectFeatures',
                                                         'heads' => [
-                                                            'id',
-                                                            'title',
-                                                            'progress',
-                                                            'status',
-                                                            'actions'
+                                                            'ID',
+                                                            'Feature',
+                                                            'Status',
+                                                            'Actions'
                                                         ],
-                                                    'project_id' => $project->id,
-                                                    'user_id' => auth()->user()->id,
+                                                    'search_id' => auth()->user()->id,
+                                                    'route' => route('projects.features', $project->id),
+                                                    'progressbar' => true,
                                                     ]
                                                 )
                                             </div>
@@ -110,8 +110,8 @@
                                                             'status',
                                                             'actions'
                                                         ],
-                                                    'project_id' => $project->id,
-                                                    'user_id' => auth()->user()->id,
+                                                    'route' => route('tasks.project', $project->id),
+                                                    'progressbar' => false,
                                                     ]
                                                 )
                                             </div>
@@ -124,8 +124,9 @@
                                                             'status',
                                                             'actions'
                                                         ],
-                                                    'project_id' => $project->id,
-                                                    'user_id' => auth()->user()->id,
+                                                    'search_id' => auth()->user()->id,
+                                                    'route' => route('tasks.user', auth()->user()->id),
+                                                    'progressbar' => false,
                                                     ]
                                                 )</div>
                                         </div>
