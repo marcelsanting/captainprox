@@ -22,6 +22,7 @@
  */
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTaskPost;
 use App\Models\Feature;
 use App\models\Status;
 use App\Models\Task;
@@ -55,12 +56,8 @@ class TaskController extends Controller
                 'only' => [
                     'index',
                     'show',
-                    'projectsdata',
-                    'create',
                     'store',
-                    'destroy',
-                    'tasksbyUser'
-                ]
+                    ]
             ]
         );
     }
@@ -77,23 +74,52 @@ class TaskController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param Feature $feature The Feature Model
+     *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Feature $feature)
     {
-        Return response();
+        Return view(
+            'projects.tasks.add_task',
+            [
+                "statuses" => Status::all(),
+                "users" => User::all(),
+                "feature" => $feature
+            ]
+        );
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request Request handler
+     * @param StoreTaskPost $request Request handler
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTaskPost $request)
     {
-        Return response();
+        $validated = $request->validated();
+
+        Task::create(
+            request(
+                [
+                    'body',
+                    'user_id',
+                    'created_by',
+                    'feature_id',
+                    'status',
+                    'project_id',
+                    'title',
+                ]
+            )
+        );
+
+        if (!$validated) {
+            return redirect()->back();
+        }
+
+        return redirect()->route('features.show', request(['feature_id']));
     }
 
     /**
@@ -138,7 +164,19 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        Return response();
+        $task->title = $request->get('title');
+        $task->body = $request->get('body');
+        $task->status = $request->get('status');
+        $task->assigned_id = $request->get('assigned_id');
+        $task->save();
+
+
+        if ($task->currentstatus->title == 'Closed') {
+            $task->closed = true;
+            $task->save();
+        }
+
+        return redirect()->route('features.show', $task->feature_id);
     }
 
     /**

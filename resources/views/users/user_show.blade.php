@@ -100,7 +100,8 @@
                             'status',
                             'actions'
                             ],
-                    'route' => route('tasks.user', auth()->user()->id),
+                    'route' => route('tasks.user', $user->id),
+                    'progressbar' => false,
                     ]
                     )
                 </div>
