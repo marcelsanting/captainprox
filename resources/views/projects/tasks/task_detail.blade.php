@@ -5,7 +5,9 @@
     <div class="row">
         <div class="bgc-white p-45 bd  col-md-6  h-1@lg">
             <h2 class="c-grey-900">Detail Task #{{ $task->id }}</h2>
-            <form action="{{ route('tasks.store') }}" class="form-control">
+            <form action="{{ route('tasks.update', $task->id) }}" method="post" class="form-control">
+                @method('PUT')
+                @csrf
                 <h6 class="c-grey-900 badge-secondary" style="text-align: right;text-decoration-color:#fff;">{{ $task->owner->name }}</h6>
             <div class="form-row">
                 <label for="title" class="col-form-label-lg col-md-12">Subject

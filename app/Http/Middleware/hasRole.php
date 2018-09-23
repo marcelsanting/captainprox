@@ -24,7 +24,7 @@ class hasRole
                 ' Only Aadmin can operate records.'
             );
 
-            return Redirect::back();
+            return redirect()->back();
         }
         return $next($request);
     }

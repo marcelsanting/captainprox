@@ -9,6 +9,21 @@ Use App\Models\TaskComment;
 class Task extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'body',
+        'user_id',
+        'created_by',
+        'feature_id',
+        'status',
+        'project_id',
+        'title',
+        'closed'
+    ];
+    /**
      * Return Status name of status
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -37,6 +52,5 @@ class Task extends Model
     {
         return $this->hasMany(TaskComment::class);
     }
-
 
 }

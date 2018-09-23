@@ -31,6 +31,8 @@ Route::resources(
         'statuses' => 'StatusController',
     ]
 );
+/* personlized routes */
+Route::get('/tasks/create/{feature}', 'TaskController@create')->name('tasks.create');
 
 /* Datatable routes */
 Route::get('/admin', 'AdminController@index');
@@ -39,7 +41,7 @@ Route::get('/admin/data/feature/tasks/{feature}', 'TaskController@tasksbyFeature
 Route::get('/admin/data/project/tasks/{project}', 'TaskController@tasksbyProject')
         ->name('tasks.project');
 Route::get('/admin/data/user/tasks/{user}', 'TaskController@tasksbyUser')
-    ->name('tasks.user');
+        ->name('tasks.user');
 Route::get('/admin/data/features/{project}', 'FeatureController@featuresbyID')
         ->name('projects.features');
 Route::get('/admin/data/projects', 'ProjectController@projectsdata');
