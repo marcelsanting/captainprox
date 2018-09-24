@@ -83,7 +83,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="tab-content layer w-100 mB-10">
+                                        <div class="tab-content layer w-100 mB-10" style="max-height: 540px">
                                             <div role="tabpanel" class="tab-pane fade" id="features">
                                                 @include(
                                                     'projects.assets.datatable',
